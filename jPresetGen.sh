@@ -1,6 +1,7 @@
 #! /usr/bin/env bash 
 
 # JOSM Preset Builder
+# License : GPLv3
 # Prime Jyothi 20140720 primejyothi [at] gmail [dot] com
 #
 # Based on the data provided in a text file, build a XML file that can be
