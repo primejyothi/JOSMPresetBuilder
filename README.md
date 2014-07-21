@@ -36,15 +36,22 @@ empty, JOSM will prompt for it when the corresponding preset is selected.
 
 jpField=multiselect : Create a list of values from which multiple 
 selections can be made. The following key value pairs can be used.
+
 key : Name of the tag in JOSM. 
+
 text : Name of the multi select element.
+
 values : The list elements. Can take the form values=v1,values=v2 etc.
+
 default : The element that will be selected by default.
 
 jpField=combo : Create a drop down list. The following key value pairs
 are supported.
+
 key : Name of the tag in JOSM.
+
 text : Text label for the drop down.
+
 values : The drop down elements. Can take the form values=v1, values=v2.
 
 
