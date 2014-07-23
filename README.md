@@ -54,6 +54,17 @@ text : Text label for the drop down.
 
 values : The drop down elements. Can take the form values=v1, values=v2.
 
+jpField=check : Create a check box. The following key value pairs are Supported
+
+key : Name of the tag in JOSM
+
+text : Display name for the check box
+
+value_on : Value when set
+
+value_off : Value when unset
+
+default : Default state
 
 ##### Sample data file
 ```

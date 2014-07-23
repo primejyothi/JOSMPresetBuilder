@@ -22,7 +22,8 @@
 # set properties of items, create multi select or combo elements.
 
 # jpField=name : Used for the name label & type key value pairs. The type
-# filed can be repeated to have multiple values.
+# filed identifies the data type and it can be repeated to have multiple
+# values.
 # 
 # jpField=kvp : JOSM Tag key value pairs. If the value of the key is left
 # empty, JOSM will prompt for it when the corresponding preset is selected.
@@ -39,7 +40,14 @@
 # key : Name of the tag in JOSM.
 # text : Text label for the drop down.
 # values : The drop down elements. Can take the form values=v1, values=v2.
-
+#
+# jpField=check : Create a check box. The following key value pairs are
+# Supported
+# key : Name of the tag in JOSM
+# text : Display name for the check box
+# value_on : Value when set
+# value_off : Value when unset
+# default : Default state
 
 # Log functions.
 . ./logs.sh
@@ -313,6 +321,76 @@ function processCombo ()
 	wx "<combo key=\"${key}\" text=\"${text}\" values=\"${valString}\" />"
 }
 
+function processCheck ()
+{
+	dbg $LINENO "Processing checkbox [$@]"
+	valString=""
+	IFS='~'
+	cAll=""
+	for i in `echo $@ | tr ',' '~'`
+	do
+		IFS=${oldIFS}
+
+		dbg $LINENO "$i"
+		k=`echo $i | awk -F"=" '{print $1}'`
+		v=`echo $i | awk -F"=" '{print $2}'`
+		dbg $LINENO "k = [$k] v = [$v]"
+
+		case "$k" in
+			"key" )
+				key=$v
+				;;
+			"text" )
+				text=$v
+				;;
+			"value_on" )
+				vOn=$v
+				;;
+			"value_off" )
+				vOff=$v
+				;;
+			"default" )
+				defV=$v
+				;;
+			"jpField" )
+				# No need to process this here, skip.
+				;;
+			* )
+				# Catch all.
+				cAll="${cAll} $k=\"${v}\""
+				;;
+		esac
+	done
+	# Write the combo element.
+	chkStr="<check key=\"${key}\" text=\"${text}\"" 
+	if [[ ! -z "$vOn" ]]
+	then
+		chkStr="${chkStr} value_on=\"${vOn}\""
+	fi
+
+	if [[ ! -z "$vOff" ]]
+	then
+		chkStr="${chkStr} value_off=\"${vOff}\""
+	fi
+
+	dbg $LINENO "Catch all is [$cAll]"
+
+	if [[ ! -z "$defV" ]]
+	then
+		chkStr="${chkStr} default=\"${defV}\""
+	fi
+
+	if [[ ! -z "$cAll" ]]
+	then
+		chkStr="${chkStr} ${cAll}"
+	fi
+
+	chkStr="${chkStr} />"
+	log $LINENO "chkStr is [$chkStr]"
+
+	wx "$chkStr"
+
+}
 function processItem ()
 {
 	log $LINENO "Processing item [$@]"
@@ -359,6 +437,11 @@ function processItem ()
 				"combo" )
 					dbg $LINENO "Process combo [$data]"
 					processCombo ${data}
+					;;
+				"check" )
+					dbg $LINENO "Process checkbox [$data]"
+					processCheck ${data}
+					;;
 			esac
 		done
 	done

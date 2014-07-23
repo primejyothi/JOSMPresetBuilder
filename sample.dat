@@ -8,7 +8,7 @@ subgroup|Sub group 1
 item|jpField=name,name=item 1A,label=Label 1A,type=node,type=closedway|jpField=kvp,key1A_1=,key1A_2=value1A_2,key1A_3=value1A_3|jpField=multiselect,key=msKey,text=Multi Select_A,values=ms1,values=ms2,values=ms3,default=ms1|jpField=multiselect,key=msKey2,text=Multi Select_B,values=ms1A,values=ms2A,values=ms3A,default=ms1A|jpField=combo,key=highway,text=Type of highway,values=trunk,values=primary,values=secondary
 item|jpField=name,name=item 1B,label=Label 1B,type=node|jpField=kvp,key1B_1=,key1B_2=,key1B_3=value1B_3|
 subgroup|Sub group 2
-item|jpField=name,name=item 2A,label=Label 2A|jpField=kvp,key2a=val2a
+item|jpField=name,name=item 2A,label=Label 2A|jpField=kvp,key2a=val2a|jpField=check,key=check1,text=Check Box1,default=on,value_on=yes,value_off=no,disable_off=true
 item|jpField=name,name=item 2B,label=Label 2B|jpField=kvp,key2b=val2b,name=|jpField=combo,key=highway,text=Type of highway,values=trunk,values=primary,values=secondary
 subgroup|Sub group 3
 item|jpField=name,name=item 3A,label=Label 3A|jpField=kvp,key3a=val3a
